@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kotki!</title>
+    <style>
+        /* Styl dla całej strony, żeby było kolorowo! */
+        body {
+            background: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red); /* Tęcza na tle! */
+            background-size: 400% 400%;
+            animation: tecza-animacja 10s infinite alternate; /* Tęcza będzie tańczyć! */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Żeby było na całą wysokość! */
+            margin: 0;
+            overflow: hidden; /* Żeby koty nie uciekały! */
+        }
+
+        /* Styl dla napisu "BALANGA NA CAŁEGO" */
+        .balanga-napis {
+            font-size: 80px;
+            font-family: 'Comic Sans MS', cursive; /* Bo to wesoły napis! */
+            color: white;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ffff00; /* Dużo blasku! */
+            animation: migotanie 1.5s infinite alternate; /* Będzie migać! */
+            z-index: 10; /* Żeby był na wierzchu! */
+            position: relative;
+        }
+
+        /* Styl dla tańczących kotów! */
+        .kotek {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(255, 165, 0); /* Kotek pomarańczowy! */
+            border-radius: 50%; /* Żeby był okrągły jak piłeczka! */
+            position: absolute;
+            bottom: -50px; /* Zaczyna od dołu! */
+            left: 50%;
+            transform: translateX(-50%);
+            animation: tanczacy-kotek 3s infinite ease-in-out; /* Kotek tańczy! */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px; /* Duże oczka! */
+            color: black;
+            text-shadow: 2px 2px 5px white;
+        }
+        
+        /* Kotek drugi, żeby było więcej balangi! */
+        .kotek.drugi {
+            background-color: purple;
+            animation-delay: 1.5s; /* Żeby tańczyły na zmianę! */
+            left: 30%;
+        }
+
+        /* Kotek trzeci, jeszcze więcej balangi! */
+        .kotek.trzeci {
+            background-color: limegreen;
+            animation-delay: 0.7s;
+            left: 70%;
+        }
+
+        /* Animacja tęczy, żeby się ruszała! */
+        @keyframes tecza-animacja {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Animacja migotania dla napisu! */
+        @keyframes migotanie {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.5; transform: scale(1); }
+        }
+
+        /* Animacja tańczącego kotka! */
+        @keyframes tanczacy-kotek {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-100px) rotate(45deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(-50px) rotate(-45deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1 class="balanga-napis">KOTKI SOM SUPER! 🎉</h1>
+
+    <div class="kotek">😺</div>
+    <div class="kotek drugi">😼</div>
+    <div class="kotek trzeci">😻</div>
+
+    <script>
+        // Tutaj Dżawa Skrypt, żeby było jeszcze bardziej balangowo!
+        // To sprawi, że kotki będą zmieniać kolor!
+        const kotki = document.querySelectorAll('.kotek');
+        const kolory = ['red', 'blue', 'yellow', 'pink', 'cyan'];
+
+        let indeksKoloru = 0;
+        setInterval(() => {
+            kotki.forEach(kotek => {
+                kotek.style.backgroundColor = kolory[indeksKoloru];
+            });
+            indeksKoloru = (indeksKoloru + 1) % kolory.length;
+        }, 1000); // Co sekundę zmieniają kolor!
+
+        // I jeszcze, żeby co jakiś czas wyskakiwał confetti!
+        setInterval(() => {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'absolute';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = kolory[Math.floor(Math.random() * kolory.length)];
+            confetti.style.borderRadius = '50%';
+            confetti.style.left = Math.random() * 100 + 'vw'; // Losowe miejsce!
+            confetti.style.top = Math.random() * 100 + 'vh'; // Losowe miejsce!
+            confetti.style.animation = 'opadanie 3s forwards'; // Będzie spadać!
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove(); // Usuwamy confetti, żeby nie zaśmiecać!
+            }, 3000);
+        }, 200); // Co 0.2 sekundy nowe confetti!
+
+        // Animacja dla confetti!
+        const styleSheet = document.createElement('style');
+        styleSheet.type = 'text/css';
+        styleSheet.innerText = `
+            @keyframes opadanie {
+                0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+                100% { transform: translateY(1000px) rotate(720deg) scale(0); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+    </script>
+
+</body>
+</html>
